@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using WebsiteBanHang.Models;
 
-    public class MockProductRepository 
-    {
+    public class MockProductRepository : IProductRepository
+{
+    
     private readonly List<Product> _products;
     public MockProductRepository()
     {

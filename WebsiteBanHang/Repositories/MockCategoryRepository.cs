@@ -2,8 +2,9 @@
 
 namespace WebsiteBanHang.Repositories;
 
-    public class MockCategoryRepository
+    public class MockCategoryRepository : ICategoryRepository
 {
+
     private List<Category> _categoryList;
     public MockCategoryRepository()
     {

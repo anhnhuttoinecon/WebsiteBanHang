@@ -4,9 +4,9 @@ using WebsiteBanHang.Models;
 
 //namespace WebsiteBanHang.Controllers;
 namespace WebsiteBanHang.Repositories;
-public class ProductController
+public class ProductController : Controller
 
-    { 
+{ 
     private readonly IProductRepository _productRepository;
     private readonly ICategoryRepository _categoryRepository;
 
