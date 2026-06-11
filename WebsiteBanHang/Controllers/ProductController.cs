@@ -95,5 +95,46 @@ public class ProductController : Controller
         _productRepository.Delete(id);
         return RedirectToAction("Index");
     }
+
+    // Cập nhật `ProductController` để xử lý việc upload hình ảnh
+    [HttpPost]
+    public async Task<IActionResult> Add(Product product, IFormFile imageUrl, List<IFormFile> imageUrls)
+    {
+        if (ModelState.IsValid)
+        {
+            if (imageUrl != null)
+            {
+                // Lưu hình ảnh đại diện 
+                product.ImageUrl = await SaveImage(imageUrl);
+            }
+
+            if (imageUrls != null)
+            {
+                product.ImageUrls = new List<string>();
+                foreach (var file in imageUrls)
+                {
+                    // Lưu các hình ảnh khác 
+                    product.ImageUrls.Add(await SaveImage(file));
+                }
+            }
+
+            _productRepository.Add(product);
+            return RedirectToAction("Index");
+        }
+
+        return View(product);
+    }
+
+    private async Task<string> SaveImage(IFormFile image)
+    {
+        var savePath = Path.Combine("wwwroot/images", image.FileName); // Thay đổi đường dẫn theo cấu hình của bạn 
+
+        using (var fileStream = new FileStream(savePath, FileMode.Create))
+        {
+            await image.CopyToAsync(fileStream);
+        }
+
+        return "/images/" + image.FileName; // Trả về đường dẫn tương đối 
+    }
 }
 
