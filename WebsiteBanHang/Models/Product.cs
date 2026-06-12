@@ -7,7 +7,7 @@ namespace WebsiteBanHang.Models
         public int Id { get; set; }
         [Required, StringLength(100)]
         public string Name { get; set; }
-        [Range(0.01, 100000.00)]
+        [Range(0.01, 1000000000.00)]
         public decimal Price { get; set; }
         public string Description { get; set; }
         public int CategoryId { get; set; }

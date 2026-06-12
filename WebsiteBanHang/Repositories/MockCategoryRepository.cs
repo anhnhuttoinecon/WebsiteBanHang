@@ -10,8 +10,8 @@ namespace WebsiteBanHang.Repositories;
     {
         _categoryList = new List<Category>
        {
-            new Category { Id = 1, Name = "Laptop" },
-            new Category { Id = 2, Name = "Desktop" },             
+            new Category { Id = 1, Name = "Smart Phone" },
+            new Category { Id = 2, Name = "Đồ gia dụng" },             
 		    // Thêm các category khác         
 	  };
     }

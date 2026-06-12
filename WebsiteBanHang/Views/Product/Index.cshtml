@@ -13,15 +13,16 @@
     <a asp-action="Add" class="text-primary text-decoration-none">Create New</a>
 </p>
 
-<table class="table">
+<table class="table align-middle">
     <thead>
         <tr>
             <th>Id</th>
             <th>Name</th>
             <th>Price</th>
+            <th>Image</th>
             <th>Description</th>
             <th>CategoryId</th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -31,6 +32,12 @@
                 <td>@item.Id</td>
                 <td>@item.Name</td>
                 <td>@item.Price</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                        <img src="@item.ImageUrl" alt="Product Image" style="width: 100px; height: auto; border-radius: 8px;" />
+                    }
+                </td>
                 <td>@item.Description</td>
                 <td>@item.CategoryId</td>
                 <td>
