@@ -1,7 +1,51 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
 @model IEnumerable<WebsiteBanHang.Models.Product>
+
+<h2 class="mt-4 mb-3">Danh sách sản phẩm</h2>
+<p>
+    <a asp-action="Add" class="btn btn-primary">Thêm sản phẩm mới</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Tên sản phẩm</th>
+            <th>Giá</th>
+            <th>Mô tả</th>
+            <th>Danh mục</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Price.ToString("#,##0") VNĐ</td>
+                <td>@item.Description</td>
+                <td>@item.Category?.Name</td>
+                <td>
+                    <a asp-action="Display" asp-route-id="@item.Id" class="btn btn-info btn-sm">Chi tiết</a>
+                    <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Sửa</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+@* @model IEnumerable<WebsiteBanHang.Models.Product>
 
 @{
     ViewData["Title"] = "Index";
@@ -48,4 +92,4 @@
             </tr>
         }
     </tbody>
-</table>
+</table> *@

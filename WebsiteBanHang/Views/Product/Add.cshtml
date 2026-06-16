@@ -1,6 +1,46 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+   
+@model WebsiteBanHang.Models.Product
+
+<h2 class="mt-4 mb-3">Thêm sản phẩm mới</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Add" method="post">
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="form-label">Tên sản phẩm</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Price" class="form-label">Giá tiền</label>
+                <input asp-for="Price" class="form-control" type="number" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Description" class="form-label">Mô tả</label>
+                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="CategoryId" class="form-label">Danh mục</label>
+                <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-control"></select>
+            </div>
+
+            <div class="form-group mb-3">
+                <button type="submit" class="btn btn-success">Lưu sản phẩm</button>
+                <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 @* @{
     @model WebsiteBanHang.Models.Product
 @using Microsoft.AspNetCore.Mvc.Rendering
@@ -41,7 +81,7 @@
 </form>
 } *@
 
-@model WebsiteBanHang.Models.Product
+@* @model WebsiteBanHang.Models.Product
 @using Microsoft.AspNetCore.Mvc.Rendering
 @{
     ViewData["Title"] = "Add Product";
@@ -84,10 +124,10 @@
 
             <div class="mb-3">
                 <label class="form-label">Additional Images</label>
-                <input type="file" asp-for="ImageUrls" multiple class="form-control" />
+                <input type="file" asp-for="ImageUrl" multiple class="form-control" />
             </div>
 
             <button type="submit" class="btn btn-primary px-4 mt-2">Add</button>
         </form>
     </div>
-</div>
+</div> *@

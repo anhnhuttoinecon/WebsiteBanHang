@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WebsiteBanHang.Models
+/*namespace WebsiteBanHang.Models
 {
     public class Product
     {
@@ -14,5 +15,20 @@ namespace WebsiteBanHang.Models
 
         public string? ImageUrl { get; set; } // Đường dẫn đến hình ảnh đại diện     
         public List<string>? ImageUrls { get; set; } // Danh sách các hình ảnh khác
+    }
+}*/
+namespace WebsiteBanHang.Models
+{
+    public class Product
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        [Column(TypeName = "decimal(18, 2)")]
+        public decimal Price { get; set; }
+        public string Description { get; set; }
+        public string? ImageUrl { get; set; }
+        public int CategoryId { get; set; }
+        public Category? Category { get; set; }
+        public List<ProductImage>? Images { get; set; }
     }
 }
