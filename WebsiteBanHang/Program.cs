@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using WebsiteBanHang.Data;
 using WebsiteBanHang.Repositories;
 
@@ -7,6 +8,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Thêm cấu hình DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+/*
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+*/
+// Cấu hình Identity
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddDefaultTokenProviders()
+    .AddDefaultUI()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddRazorPages();
 
 // Đăng ký Repositories (Lưu ý: Thay đổi từ Mock sang EF)
 builder.Services.AddScoped<IProductRepository, EFProductRepository>();
@@ -24,14 +35,22 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseRouting();
+
+// BẮT BUỘC PHẢI CÓ: Xác thực người dùng (đặt trước Authorization)
+app.UseAuthentication();
 app.UseAuthorization();
+
+// BẮT BUỘC PHẢI CÓ: Map giao diện Razor Pages của Identity (Login, Register...)
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
 
 
 
